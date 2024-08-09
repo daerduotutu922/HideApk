@@ -91,8 +91,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button ExternhideLoadSoBtn = binding.ExternHideLoadSo;
-        ExternhideLoadSoBtn.setOnClickListener(new View.OnClickListener() {
+
+        Button rxposedModuleLoadBtn = binding.rxposedModuleLoad;
+        rxposedModuleLoadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("rzx","ExternhideLoadSoBtn");
@@ -125,7 +126,42 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        Button customLinkerLoadsoBtn = binding.customLinkerLoadso;
+        customLinkerLoadsoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customLinkerLoadPathSO();
+            }
+        });
+        Button ExternZlibLoadApk = binding.ExternZlibLoadApk;
+        ExternZlibLoadApk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("rzx","zipLoadApk");
+                ApplicationInfo applicationInfo = null;
+                try {
+                    applicationInfo = getApplication().getPackageManager().getApplicationInfo("com.hepta.fridaload", 0);
+                } catch (PackageManager.NameNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                zipLoadApk(applicationInfo.sourceDir);
+            }
+        });
+
+        Button SystenStubLoadSo = binding.SystenStubLoadSo;
+        SystenStubLoadSo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SystenStubLoadSo();
+            }
+        });
+
     }
+    private native ClassLoader zipLoadApk(String s);
+    private native void SystenStubLoadSo();
+    private native void customLinkerLoadPathSO();
 
     private native void customFilehideApkLoad(String s);
     private native void customMemhideApkLoad(String s);
